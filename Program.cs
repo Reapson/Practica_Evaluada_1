@@ -1,7 +1,17 @@
+using Practica_Evaluada_1.Data;
+using Practica_Evaluada_1.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Registro de dependencias del proyecto.
+// IClienteRepository representa la capa de acceso a datos.
+// IClienteService representa la capa logica de negocio.
+// AddSingleton se usa porque los datos actuales viven en memoria durante la ejecucion.
+builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
+builder.Services.AddSingleton<IClienteService, ClienteService>();
 
 var app = builder.Build();
 
