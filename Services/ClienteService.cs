@@ -5,8 +5,8 @@ namespace Practica_Evaluada_1.Services
 {
     /// <summary>
     /// Capa logica de negocio para clientes.
-    /// En este primer avance solo se implementa el listado porque es el tercio
-    /// asignado. Las demas reglas del CRUD deben agregarse en esta clase.
+    /// Aqui se centralizan las reglas basicas antes de enviar la informacion
+    /// hacia la capa de acceso a datos.
     /// </summary>
     public class ClienteService : IClienteService
     {
@@ -20,6 +20,35 @@ namespace Practica_Evaluada_1.Services
         public List<Cliente> ObtenerClientes()
         {
             return _clienteRepository.ObtenerTodos();
+        }
+
+        public Cliente? ObtenerClientePorId(int id)
+        {
+            return _clienteRepository.ObtenerPorId(id);
+        }
+
+        public void RegistrarCliente(Cliente cliente)
+        {
+            cliente.Telefonos = LimpiarTelefonosVacios(cliente.Telefonos);
+            _clienteRepository.Registrar(cliente);
+        }
+
+        public void ModificarCliente(Cliente cliente)
+        {
+            cliente.Telefonos = LimpiarTelefonosVacios(cliente.Telefonos);
+            _clienteRepository.Modificar(cliente);
+        }
+
+        public void BorrarCliente(int id)
+        {
+            _clienteRepository.Borrar(id);
+        }
+
+        private List<Telefono> LimpiarTelefonosVacios(List<Telefono> telefonos)
+        {
+            return telefonos
+                .Where(telefono => !string.IsNullOrWhiteSpace(telefono.Numero))
+                .ToList();
         }
     }
 }

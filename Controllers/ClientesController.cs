@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Practica_Evaluada_1.Models;
 using Practica_Evaluada_1.Services;
 
 namespace Practica_Evaluada_1.Controllers
@@ -12,9 +13,6 @@ namespace Practica_Evaluada_1.Controllers
             _clienteService = clienteService;
         }
 
-        /// <summary>
-        /// Primer avance desarrollado: listado general de clientes con sus telefonos.
-        /// </summary>
         public IActionResult Index()
         {
             var clientes = _clienteService.ObtenerClientes();
@@ -23,26 +21,83 @@ namespace Practica_Evaluada_1.Controllers
 
         public IActionResult Detalle(int id)
         {
-            // TODO: Companeros, desarrollar el detalle de un cliente especifico.
-            return View();
+            var cliente = _clienteService.ObtenerClientePorId(id);
+
+            if (cliente is null)
+            {
+                return NotFound();
+            }
+
+            return View(cliente);
         }
 
         public IActionResult Registrar()
         {
-            // TODO: Companeros, desarrollar el formulario para registrar cliente y N telefonos.
-            return View();
+            return View(new ClienteViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Registrar(ClienteViewModel clienteViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(clienteViewModel);
+            }
+
+            _clienteService.RegistrarCliente(clienteViewModel.ConvertirACliente());
+            TempData["Mensaje"] = "Cliente registrado correctamente.";
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Modificar(int id)
         {
-            // TODO: Companeros, desarrollar la modificacion de datos y telefonos del cliente.
-            return View();
+            var cliente = _clienteService.ObtenerClientePorId(id);
+
+            if (cliente is null)
+            {
+                return NotFound();
+            }
+
+            return View(ClienteViewModel.DesdeCliente(cliente));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Modificar(ClienteViewModel clienteViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(clienteViewModel);
+            }
+
+            _clienteService.ModificarCliente(clienteViewModel.ConvertirACliente());
+            TempData["Mensaje"] = "Cliente modificado correctamente.";
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Borrar(int id)
         {
-            // TODO: Companeros, desarrollar la confirmacion y borrado del cliente con sus telefonos.
-            return View();
+            var cliente = _clienteService.ObtenerClientePorId(id);
+
+            if (cliente is null)
+            {
+                return NotFound();
+            }
+
+            return View(cliente);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ConfirmarBorrado(int id)
+        {
+            _clienteService.BorrarCliente(id);
+            TempData["Mensaje"] = "Cliente borrado correctamente.";
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

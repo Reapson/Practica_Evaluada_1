@@ -3,8 +3,8 @@ using Practica_Evaluada_1.Models;
 namespace Practica_Evaluada_1.Data
 {
     /// <summary>
-    /// Implementacion temporal de acceso a datos usando una lista en memoria.
-    /// Para este primer avance permite mostrar el listado sin configurar base de datos.
+    /// Implementacion de acceso a datos usando una lista en memoria.
+    /// Permite cumplir la practica sin configurar base de datos.
     /// Luego se puede reemplazar esta clase por Entity Framework, SQL Server u otro
     /// mecanismo de persistencia manteniendo el mismo contrato IClienteRepository.
     /// </summary>
@@ -55,6 +55,71 @@ namespace Practica_Evaluada_1.Data
         public List<Cliente> ObtenerTodos()
         {
             return _clientes;
+        }
+
+        public Cliente? ObtenerPorId(int id)
+        {
+            return _clientes.FirstOrDefault(cliente => cliente.Id == id);
+        }
+
+        public void Registrar(Cliente cliente)
+        {
+            cliente.Id = ObtenerSiguienteClienteId();
+            AsignarIdsTelefonos(cliente);
+            _clientes.Add(cliente);
+        }
+
+        public void Modificar(Cliente cliente)
+        {
+            var clienteActual = ObtenerPorId(cliente.Id);
+
+            if (clienteActual is null)
+            {
+                return;
+            }
+
+            clienteActual.Cedula = cliente.Cedula;
+            clienteActual.NombreCompleto = cliente.NombreCompleto;
+            clienteActual.CorreoElectronico = cliente.CorreoElectronico;
+            clienteActual.Direccion = cliente.Direccion;
+            clienteActual.Telefonos = cliente.Telefonos;
+
+            AsignarIdsTelefonos(clienteActual);
+        }
+
+        public void Borrar(int id)
+        {
+            var cliente = ObtenerPorId(id);
+
+            if (cliente is not null)
+            {
+                _clientes.Remove(cliente);
+            }
+        }
+
+        private int ObtenerSiguienteClienteId()
+        {
+            return _clientes.Count == 0 ? 1 : _clientes.Max(cliente => cliente.Id) + 1;
+        }
+
+        private int ObtenerSiguienteTelefonoId()
+        {
+            var telefonos = _clientes.SelectMany(cliente => cliente.Telefonos).ToList();
+            return telefonos.Count == 0 ? 1 : telefonos.Max(telefono => telefono.Id) + 1;
+        }
+
+        private void AsignarIdsTelefonos(Cliente cliente)
+        {
+            var siguienteId = ObtenerSiguienteTelefonoId();
+
+            foreach (var telefono in cliente.Telefonos)
+            {
+                if (telefono.Id == 0)
+                {
+                    telefono.Id = siguienteId;
+                    siguienteId++;
+                }
+            }
         }
     }
 }

@@ -1,6 +1,33 @@
+@model Practica_Evaluada_1.Models.Cliente
+
 @{
     ViewData["Title"] = "Detalle de cliente";
 }
 
-@* TODO: Companeros, implementar la vista con toda la informacion de un cliente especifico y sus telefonos. *@
-<h1 class="h3">Detalle de cliente</h1>
+<h1 class="h3 mb-3">Detalle de cliente</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Cedula</dt>
+    <dd class="col-sm-9">@Model.Cedula</dd>
+
+    <dt class="col-sm-3">Nombre completo</dt>
+    <dd class="col-sm-9">@Model.NombreCompleto</dd>
+
+    <dt class="col-sm-3">Correo electronico</dt>
+    <dd class="col-sm-9">@Model.CorreoElectronico</dd>
+
+    <dt class="col-sm-3">Direccion</dt>
+    <dd class="col-sm-9">@Model.Direccion</dd>
+</dl>
+
+<h2 class="h5">Telefonos</h2>
+
+<ul class="list-group mb-3">
+    @foreach (var telefono in Model.Telefonos)
+    {
+        <li class="list-group-item">@telefono.Tipo: @telefono.Numero</li>
+    }
+</ul>
+
+<a class="btn btn-outline-secondary" asp-action="Index">Volver</a>
+<a class="btn btn-warning" asp-action="Modificar" asp-route-id="@Model.Id">Modificar</a>

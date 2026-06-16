@@ -11,7 +11,12 @@ namespace Practica_Evaluada_1.Data
     {
         List<Cliente> ObtenerTodos();
 
-        // TODO: Companeros, agregar aqui los contratos necesarios para:
-        // ObtenerPorId, Registrar, Modificar y Borrar clientes.
+        Cliente? ObtenerPorId(int id);
+
+        void Registrar(Cliente cliente);
+
+        void Modificar(Cliente cliente);
+
+        void Borrar(int id);
     }
 }

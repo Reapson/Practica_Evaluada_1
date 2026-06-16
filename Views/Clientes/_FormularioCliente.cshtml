@@ -1,0 +1,128 @@
+@model Practica_Evaluada_1.Models.ClienteViewModel
+
+@* Formulario compartido por Registrar y Modificar.
+   Se usa un parcial para evitar duplicar el mismo codigo en dos vistas. *@
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<input asp-for="Id" type="hidden" />
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <label asp-for="Cedula" class="form-label"></label>
+        <input asp-for="Cedula" class="form-control" />
+        <span asp-validation-for="Cedula" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-8">
+        <label asp-for="NombreCompleto" class="form-label"></label>
+        <input asp-for="NombreCompleto" class="form-control" />
+        <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="CorreoElectronico" class="form-label"></label>
+        <input asp-for="CorreoElectronico" class="form-control" />
+        <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Direccion" class="form-label"></label>
+        <input asp-for="Direccion" class="form-control" />
+        <span asp-validation-for="Direccion" class="text-danger"></span>
+    </div>
+</div>
+
+<hr />
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h2 class="h5 mb-0">Numeros de telefono</h2>
+    <button type="button" class="btn btn-sm btn-outline-primary" onclick="agregarTelefono()">Agregar telefono</button>
+</div>
+
+<div id="telefonos">
+    @for (var i = 0; i < Model.Telefonos.Count; i++)
+    {
+        <div class="row g-2 align-items-end mb-2 telefono-item">
+            <input asp-for="Telefonos[i].Id" type="hidden" />
+            <div class="col-md-5">
+                <label asp-for="Telefonos[i].Numero" class="form-label"></label>
+                <input asp-for="Telefonos[i].Numero" class="form-control" />
+            </div>
+            <div class="col-md-5">
+                <label asp-for="Telefonos[i].Tipo" class="form-label"></label>
+                <select asp-for="Telefonos[i].Tipo" class="form-select">
+                    <option value="Celular">Celular</option>
+                    <option value="Casa">Casa</option>
+                    <option value="Trabajo">Trabajo</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-outline-danger w-100" onclick="eliminarTelefono(this)">Quitar</button>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    function agregarTelefono() {
+        const contenedor = document.getElementById('telefonos');
+        const indice = contenedor.querySelectorAll('.telefono-item').length;
+
+        const fila = document.createElement('div');
+        fila.className = 'row g-2 align-items-end mb-2 telefono-item';
+
+        fila.innerHTML = `
+            <input type="hidden" name="Telefonos[${indice}].Id" value="0" />
+            <div class="col-md-5">
+                <label class="form-label" for="Telefonos_${indice}__Numero">Numero</label>
+                <input class="form-control" id="Telefonos_${indice}__Numero" name="Telefonos[${indice}].Numero" />
+            </div>
+            <div class="col-md-5">
+                <label class="form-label" for="Telefonos_${indice}__Tipo">Tipo</label>
+                <select class="form-select" id="Telefonos_${indice}__Tipo" name="Telefonos[${indice}].Tipo">
+                    <option value="Celular">Celular</option>
+                    <option value="Casa">Casa</option>
+                    <option value="Trabajo">Trabajo</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-outline-danger w-100" onclick="eliminarTelefono(this)">Quitar</button>
+            </div>`;
+
+        contenedor.appendChild(fila);
+    }
+
+    function eliminarTelefono(boton) {
+        const contenedor = document.getElementById('telefonos');
+
+        if (contenedor.querySelectorAll('.telefono-item').length === 1) {
+            boton.closest('.telefono-item').querySelector('input[name$=".Numero"]').value = '';
+            return;
+        }
+
+        boton.closest('.telefono-item').remove();
+        reordenarTelefonos();
+    }
+
+    function reordenarTelefonos() {
+        const filas = document.querySelectorAll('.telefono-item');
+
+        filas.forEach((fila, indice) => {
+            fila.querySelectorAll('input, select').forEach(campo => {
+                campo.name = campo.name.replace(/Telefonos\[\d+\]/, `Telefonos[${indice}]`);
+                campo.id = campo.id.replace(/Telefonos_\d+__/, `Telefonos_${indice}__`);
+            });
+
+            fila.querySelectorAll('label').forEach(etiqueta => {
+                const valorFor = etiqueta.getAttribute('for');
+
+                if (valorFor) {
+                    etiqueta.setAttribute('for', valorFor.replace(/Telefonos_\d+__/, `Telefonos_${indice}__`));
+                }
+            });
+        });
+    }
+</script>

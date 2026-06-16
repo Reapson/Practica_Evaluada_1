@@ -11,7 +11,12 @@ namespace Practica_Evaluada_1.Services
     {
         List<Cliente> ObtenerClientes();
 
-        // TODO: Companeros, agregar aqui los metodos de negocio para:
-        // detalle, registro, modificacion y borrado de clientes.
+        Cliente? ObtenerClientePorId(int id);
+
+        void RegistrarCliente(Cliente cliente);
+
+        void ModificarCliente(Cliente cliente);
+
+        void BorrarCliente(int id);
     }
 }

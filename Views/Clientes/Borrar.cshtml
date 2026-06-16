@@ -1,6 +1,26 @@
+@model Practica_Evaluada_1.Models.Cliente
+
 @{
     ViewData["Title"] = "Borrar cliente";
 }
 
-@* TODO: Companeros, implementar la confirmacion para borrar un cliente y sus telefonos ligados. *@
-<h1 class="h3">Borrar cliente</h1>
+<h1 class="h3 mb-3">Borrar cliente</h1>
+
+<div class="alert alert-warning">
+    Esta accion borrara el cliente y sus telefonos ligados.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Cedula</dt>
+    <dd class="col-sm-9">@Model.Cedula</dd>
+
+    <dt class="col-sm-3">Nombre completo</dt>
+    <dd class="col-sm-9">@Model.NombreCompleto</dd>
+</dl>
+
+<form asp-action="ConfirmarBorrado" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Borrar</button>
+    <a class="btn btn-outline-secondary" asp-action="Index">Cancelar</a>
+</form>

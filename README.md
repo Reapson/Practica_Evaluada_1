@@ -36,13 +36,14 @@ No se agregaron paquetes NuGet externos. Se utilizan las librerias incluidas por
 - Inyeccion de dependencias: las implementaciones se registran en Program.cs para desacoplar las capas.
 - Patron Repository: IClienteRepository y ClienteRepository separan el acceso a datos de la logica de negocio.
 
-## Alcance desarrollado en este avance
+## Funcionalidades desarrolladas
 
-Se desarrollo la base del proyecto y el listado de clientes con sus numeros de telefono.
+- Listado de clientes con sus numeros de telefono.
+- Detalle de un cliente especifico.
+- Registro de clientes con N numeros de telefono.
+- Modificacion de clientes y de sus telefonos.
+- Borrado de clientes y sus telefonos ligados.
 
-Queda pendiente para los companeros:
+## Nota tecnica
 
-- Ver detalle de cliente.
-- Registrar cliente y agregar N numeros de telefono.
-- Modificar cliente y sus telefonos.
-- Borrar cliente y sus telefonos ligados.
+Los datos se almacenan en memoria para cumplir el alcance basico de la practica sin agregar configuracion de base de datos. Al cerrar la aplicacion, los cambios realizados durante la ejecucion se pierden.

@@ -1,6 +1,21 @@
+@model Practica_Evaluada_1.Models.ClienteViewModel
+
 @{
     ViewData["Title"] = "Modificar cliente";
 }
 
-@* TODO: Companeros, implementar la modificacion del cliente y la administracion de sus telefonos. *@
-<h1 class="h3">Modificar cliente</h1>
+<h1 class="h3 mb-3">Modificar cliente</h1>
+
+<form asp-action="Modificar" method="post">
+    @Html.AntiForgeryToken()
+    <partial name="_FormularioCliente" model="Model" />
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a class="btn btn-outline-secondary" asp-action="Index">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -12,6 +12,11 @@
     <a class="btn btn-primary" asp-controller="Clientes" asp-action="Registrar">Registrar cliente</a>
 </div>
 
+@if (TempData["Mensaje"] is not null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
 <div class="table-responsive">
     <table class="table table-striped table-hover align-middle">
         <thead class="table-light">
