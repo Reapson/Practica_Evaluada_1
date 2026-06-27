@@ -1,0 +1,21 @@
+@model Practica_Evaluada_1.Models.VehiculoViewModel
+
+@{
+    ViewData["Title"] = "Registrar vehiculo";
+}
+
+<h1 class="h3 mb-3">Registrar vehiculo</h1>
+
+<form asp-action="Registrar" method="post">
+    @Html.AntiForgeryToken()
+    <partial name="_FormularioVehiculo" model="Model" />
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-outline-secondary" asp-action="Index">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

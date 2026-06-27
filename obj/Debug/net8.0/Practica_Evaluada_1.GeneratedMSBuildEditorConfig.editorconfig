@@ -20,6 +20,18 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/Citas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0YXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/Citas/Modificar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0YXNcTW9kaWZpY2FyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/Citas/Registrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0YXNcUmVnaXN0cmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/Clientes/Borrar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcQm9ycmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,6 +70,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/Vehiculos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bG9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/Vehiculos/Modificar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bG9zXE1vZGlmaWNhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/Vehiculos/Registrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bG9zXFJlZ2lzdHJhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/Vehiculos/_FormularioVehiculo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bG9zXF9Gb3JtdWxhcmlvVmVoaWN1bG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/josue/OneDrive - Universidad Fidélitas/A - Progra Avanzada Web/Practica_Evaluada_1/Practica_Evaluada_1/Views/_ViewImports.cshtml]

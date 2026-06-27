@@ -12,6 +12,8 @@ builder.Services.AddControllersWithViews();
 // AddSingleton se usa porque los datos actuales viven en memoria durante la ejecucion.
 builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
 builder.Services.AddSingleton<IClienteService, ClienteService>();
+builder.Services.AddSingleton<IVehiculoRepository, VehiculoRepository>();
+builder.Services.AddSingleton<IVehiculoService, VehiculoService>();
 
 var app = builder.Build();
 
