@@ -1,7 +1,45 @@
-@{
-    ViewData["Title"] = "Modificar cita";
-}
+@model Practica_Evaluada_1.Models.Cita
 
-<h1 class="h3 mb-3">Modificar cita</h1>
+<h2>Modificar Cita</h2>
 
-<div class="border rounded p-4"></div>
+<form asp-action="Modificar">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Cliente</label>
+        <select asp-for="ClienteId"
+                asp-items="ViewBag.Clientes"
+                class="form-control">
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Vehículo</label>
+        <select asp-for="VehiculoId"
+                asp-items="ViewBag.Vehiculos"
+                class="form-control">
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha</label>
+        <input asp-for="FechaCita"
+               type="datetime-local"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Estado</label>
+        <select asp-for="Estado" class="form-control">
+            <option>Ingresada</option>
+            <option>Cancelada</option>
+            <option>Concluida</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary">
+        Guardar cambios
+    </button>
+
+</form>

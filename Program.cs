@@ -14,6 +14,8 @@ builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
 builder.Services.AddSingleton<IClienteService, ClienteService>();
 builder.Services.AddSingleton<IVehiculoRepository, VehiculoRepository>();
 builder.Services.AddSingleton<IVehiculoService, VehiculoService>();
+builder.Services.AddSingleton<ICitaRepository, CitaRepository>();
+builder.Services.AddSingleton<ICitaService, CitaService>();
 
 var app = builder.Build();
 
