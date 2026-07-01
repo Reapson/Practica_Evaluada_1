@@ -8,9 +8,9 @@ namespace Practica_Evaluada_1.Services
 
         Cita? ObtenerCitaPorId(int id);
 
-        void RegistrarCita(Cita cita);
+        string? RegistrarCita(Cita cita);
 
-        void ModificarCita(Cita cita);
+        string? ModificarCita(Cita cita);
 
         void BorrarCita(int id);
     }

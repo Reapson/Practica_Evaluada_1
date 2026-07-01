@@ -1,45 +1,21 @@
-@model Practica_Evaluada_1.Models.Cita
+@model Practica_Evaluada_1.Models.CitaViewModel
 
-<h2>Modificar Cita</h2>
+@{
+    ViewData["Title"] = "Modificar cita";
+}
 
-<form asp-action="Modificar">
+<h1 class="h3 mb-3">Modificar cita</h1>
 
-    <input type="hidden" asp-for="Id" />
+<form asp-action="Modificar" method="post">
+    @Html.AntiForgeryToken()
+    <partial name="_FormularioCita" model="Model" />
 
-    <div class="mb-3">
-        <label>Cliente</label>
-        <select asp-for="ClienteId"
-                asp-items="ViewBag.Clientes"
-                class="form-control">
-        </select>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a class="btn btn-outline-secondary" asp-action="Index">Cancelar</a>
     </div>
-
-    <div class="mb-3">
-        <label>Vehículo</label>
-        <select asp-for="VehiculoId"
-                asp-items="ViewBag.Vehiculos"
-                class="form-control">
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label>Fecha</label>
-        <input asp-for="FechaCita"
-               type="datetime-local"
-               class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label>Estado</label>
-        <select asp-for="Estado" class="form-control">
-            <option>Ingresada</option>
-            <option>Cancelada</option>
-            <option>Concluida</option>
-        </select>
-    </div>
-
-    <button class="btn btn-primary">
-        Guardar cambios
-    </button>
-
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

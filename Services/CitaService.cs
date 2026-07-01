@@ -37,14 +37,22 @@ namespace Practica_Evaluada_1.Services
             return _citaRepository.ObtenerPorId(id);
         }
 
-        public void RegistrarCita(Cita cita)
+        public string? RegistrarCita(Cita cita)
         {
+            if (cita.FechaCita <= DateTime.Now)
+                return "La fecha de la cita debe ser mayor a la fecha actual.";
+
             _citaRepository.Registrar(cita);
+            return null;
         }
 
-        public void ModificarCita(Cita cita)
+        public string? ModificarCita(Cita cita)
         {
+            if (cita.FechaCita <= DateTime.Now)
+                return "La fecha de la cita debe ser mayor a la fecha actual.";
+
             _citaRepository.Modificar(cita);
+            return null;
         }
 
         public void BorrarCita(int id)

@@ -1,0 +1,40 @@
+@model Practica_Evaluada_1.Models.CitaViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<input asp-for="Id" type="hidden" />
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="ClienteId" class="form-label"></label>
+        <select asp-for="ClienteId" asp-items="@(new SelectList(ViewBag.Clientes, "Id", "NombreCompleto"))" class="form-select">
+            <option value="0">Seleccione un cliente</option>
+        </select>
+        <span asp-validation-for="ClienteId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="VehiculoId" class="form-label"></label>
+        <select asp-for="VehiculoId" asp-items="@(new SelectList(ViewBag.Vehiculos, "Id", "Placa"))" class="form-select">
+            <option value="0">Seleccione un vehiculo</option>
+        </select>
+        <span asp-validation-for="VehiculoId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="FechaCita" class="form-label"></label>
+        <input asp-for="FechaCita" type="datetime-local" class="form-control" />
+        <span asp-validation-for="FechaCita" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Estado" class="form-label"></label>
+        <select asp-for="Estado" class="form-select">
+            <option value="Ingresada">Ingresada</option>
+            <option value="Confirmada">Confirmada</option>
+            <option value="Completada">Completada</option>
+            <option value="Cancelada">Cancelada</option>
+        </select>
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+</div>

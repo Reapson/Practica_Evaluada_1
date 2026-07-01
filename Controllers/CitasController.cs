@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Practica_Evaluada_1.Services;
 using Practica_Evaluada_1.Models;
+using Practica_Evaluada_1.Services;
 
 namespace Practica_Evaluada_1.Controllers
 {
@@ -23,38 +22,88 @@ namespace Practica_Evaluada_1.Controllers
 
         public IActionResult Index()
         {
-            return View(_citaService.ObtenerCitas());
+            var citas = _citaService.ObtenerCitas();
+            return View(citas);
         }
 
-        [HttpGet]
+        public IActionResult Registrar()
+        {
+            CargarDatos();
+            return View(new CitaViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Registrar(CitaViewModel citaViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                CargarDatos();
+                return View(citaViewModel);
+            }
+
+            var mensajeValidacion = _citaService.RegistrarCita(citaViewModel.ConvertirACita());
+
+            if (mensajeValidacion is not null)
+            {
+                ModelState.AddModelError(string.Empty, mensajeValidacion);
+                CargarDatos();
+                return View(citaViewModel);
+            }
+
+            TempData["Mensaje"] = "Cita registrada correctamente.";
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Modificar(int id)
         {
             var cita = _citaService.ObtenerCitaPorId(id);
 
-            if (cita == null)
-                return RedirectToAction(nameof(Index));
+            if (cita is null)
+            {
+                return NotFound();
+            }
 
-            ViewBag.Clientes = new SelectList(
-                _clienteService.ObtenerClientes(),
-                "Id",
-                "NombreCompleto");
-
-            ViewBag.Vehiculos = new SelectList(
-                _vehiculoService.ObtenerVehiculos(),
-                "Id",
-                "Placa");
-
-            return View(cita);
+            CargarDatos();
+            return View(CitaViewModel.DesdeCita(cita));
         }
 
         [HttpPost]
-        public IActionResult Modificar(Cita cita)
+        [ValidateAntiForgeryToken]
+        public IActionResult Modificar(CitaViewModel citaViewModel)
         {
-            _citaService.ModificarCita(cita);
+            if (!ModelState.IsValid)
+            {
+                CargarDatos();
+                return View(citaViewModel);
+            }
 
-            TempData["Success"] = "Cita modificada correctamente";
+            var mensajeValidacion = _citaService.ModificarCita(citaViewModel.ConvertirACita());
 
+            if (mensajeValidacion is not null)
+            {
+                ModelState.AddModelError(string.Empty, mensajeValidacion);
+                CargarDatos();
+                return View(citaViewModel);
+            }
+
+            TempData["Mensaje"] = "Cita modificada correctamente.";
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Borrar(int id)
+        {
+            _citaService.BorrarCita(id);
+            TempData["Mensaje"] = "Cita borrada correctamente.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        private void CargarDatos()
+        {
+            ViewBag.Clientes = _clienteService.ObtenerClientes();
+            ViewBag.Vehiculos = _vehiculoService.ObtenerVehiculos();
         }
     }
 }
